@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>746</width>
+    <height>759</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BS-seq Analyzer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="inputMethodHints">
+       <set>Qt::ImhPreferNumbers</set>
+      </property>
+      <property name="title">
+       <string>基本信息</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QCheckBox" name="checkBox_auto_fill_col">
+         <property name="text">
+          <string>自动向下填充</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>99999</width>
+           <height>99999</height>
+          </size>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::WinPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectItems</enum>
+         </property>
+         <property name="gridStyle">
+          <enum>Qt::SolidLine</enum>
+         </property>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>27</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Ref Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Ref Sequence</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Sequencing Files</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Additional locations</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Excluded locations</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Report</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_open_report">
+         <property name="text">
+          <string>打开报告</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButton_add_line">
+            <property name="text">
+             <string>加一行</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_del_lines">
+            <property name="text">
+             <string>删除选中行</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_import_from_sheet">
+            <property name="text">
+             <string>从表格导入</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_export_sheet">
+            <property name="text">
+             <string>导出当前表格</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_clear_table">
+            <property name="text">
+             <string>清空</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>175</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>上传与分析</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>参考序列</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="PlainTextEdit" name="plainTextEdit_ref_rec_auto"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>测序文件</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QFrame" name="frame_2">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>当前选定：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_selection">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="PlainTextEdit" name="plainTextEdit_sanger_rec_auto"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>分隔符</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLineEdit" name="lineEdit_sep">
+            <property name="text">
+             <string>_</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>存储目录</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLineEdit" name="lineEdit_path"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_start">
+             <property name="text">
+              <string>设置存储路径并开始分析</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_open_folder">
+             <property name="text">
+              <string>打开存储目录</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_lyric">
+      <property name="text">
+       <string>BS-seq Analyzer
+
+——Written by M.Q. at ShanghaiTech University</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>746</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuTo_English">
+    <property name="title">
+     <string>Change Language</string>
+    </property>
+    <addaction name="actionEnglish"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionTutor"/>
+   </widget>
+   <addaction name="menuTo_English"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionEnglish">
+   <property name="text">
+    <string>load translation file</string>
+   </property>
+  </action>
+  <action name="actionChinese">
+   <property name="text">
+    <string>Chinese</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>说明</string>
+   </property>
+  </action>
+  <action name="actionTutor">
+   <property name="text">
+    <string>视频教程</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">plaintextedit</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
