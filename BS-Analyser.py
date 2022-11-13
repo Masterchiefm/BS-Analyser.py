@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QFileDialog, QMessageBox
 import pandas as pd
-import os, requests
+import os, requests, json
 from Bio import SeqIO
 
 from gui import Ui_MainWindow
@@ -34,7 +34,7 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         super(MyMainWin, self).__init__(parent)
 
         self.setupUi(self)
-        self.version = "1.1.2"
+        self.version = "1.0.0"
 
         # 表格标题读取
         col_count = self.tableWidget.columnCount()
@@ -65,6 +65,39 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         self.tableWidget.clicked.connect(self.disableAutoFill)
 
         self.pushButton_start.clicked.connect(self.annalyse)
+
+        self.checkUpdate()
+
+
+    def checkUpdate(self):
+        """使用requests模块和GitHub api获取最新版本"""
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
+        latestInfo = requests.get("https://gitee.com/api/v5/repos/MasterChiefm/BS-Analyser.py/releases/latest", timeout=2,  headers= headers)
+        # print(latestInfo)
+        try:
+            info = latestInfo.text
+            info = json.loads(info)
+            # print(info)
+            latestVersion = info["tag_name"]
+            releaseInfo = info["body"]
+            #print(latestVersion)
+
+            if latestVersion == self.version:
+                # QMessageBox.about(self, "更新", "已经是最新")
+                return
+            else:
+                msg = latestVersion + "\n" + releaseInfo
+                # QMessageBox.about(self,"更新",msg)
+                answer = QMessageBox.question(self,"New BEAR version found", msg + "\n\n Update now?")
+                if answer == QMessageBox.Yes:
+                    os.startfile("https://gitee.com/MasterChiefm/BS-Analyser.py/releases/latest")
+                else:
+                    return
+        except Exception as e:
+            # QMessageBox.about(self,"网络错误","无法连接到GitHub服务器")
+            print(e)
 
     def annalyse(self):
 
