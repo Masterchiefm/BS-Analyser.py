@@ -34,7 +34,7 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         super(MyMainWin, self).__init__(parent)
 
         self.setupUi(self)
-        self.version = "1.0.0"
+        self.version = "1.0.1"
 
         # 表格标题读取
         col_count = self.tableWidget.columnCount()

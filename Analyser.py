@@ -152,7 +152,7 @@ class BSReport:
         colors = "black"
         fig, ax = plt.subplots()
         ax.plot(plot_val, color=colors[0], label='G')
-        plt.xlabel("Sequence positions")
+        plt.xlabel("Reference sequence")
         plt.ylabel('Nums of methylation')
         plt.title(title)
         return plt
@@ -212,7 +212,7 @@ class BSReport:
         ax.grid(which="minor", color="gray", linestyle='-', linewidth=2)
         ax.set_xticks(np.arange(len(plot_loc)), labels=loc_show)
         ax.set_yticks(np.arange(len(rows)), labels=rows)
-        plt.xlabel("Sequence positions")
+        plt.xlabel("CG positions")
         plt.title(title)
 
         return plt
@@ -231,9 +231,9 @@ class BSReport:
         C_peak, C_data = self.getmC()
         CG_peak, CG_data = self.getmCG()
 
-        C_peak_map = self.plotPeakMap(C_peak, title="mC sites")
+        C_peak_map = self.plotPeakMap(C_peak, title="Methalation state of C")
         C_peak_map_md = self.plt2md(C_peak_map)
-        CG_peak_map = self.plotPeakMap(CG_peak, "mCG sites")
+        CG_peak_map = self.plotPeakMap(CG_peak, "Methalation state of CG")
         CG_peak_map_md = self.plt2md(CG_peak_map)
 
         CG_heat_map = self.plotHeatMap(CG_peak, add_locs=add_locs, exc_locs=exc_locs,
@@ -250,6 +250,15 @@ class BSReport:
 
         C_sheet = pd.DataFrame(C_data, index=sanger_names, columns=C_peak_loc_show)
         CG_sheet = pd.DataFrame(CG_data, index=sanger_names, columns=CG_peak_loc_show)
+
+        sequences = []
+        for seq in self.seqs:
+            sequence = list(seq)
+            sequences.append(sequence)
+        sequence_sheet = pd.DataFrame(sequences, index=sanger_names, columns=range(1,len(ref_seq) + 1))
+        sequence_sheet.loc["Reference"] = list(ref_seq)
+
+
 
         if save_path == "":
             pass
@@ -270,6 +279,7 @@ class BSReport:
 
         C_sheet.to_excel(save_path + "Reports/Sheets/" + report_name + "_mC.xlsx")
         CG_sheet.to_excel(save_path + "Reports/Sheets/" + report_name + "_mCG.xlsx")
+        sequence_sheet.to_excel(save_path + "Reports/Sheets/" + report_name + "_sequence.xlsx")
 
         # 网页报告内容
         title = "# BS-Seq Report of " + report_name + "\n"
@@ -308,15 +318,20 @@ class BSReport:
         data_title = "## Data sheets"
         data_description = (
                     "\nThese excel files provide methalation infomations of all sequencing file. You can use them to generate pictures like this report, or use them for other purpose.\n\n" +
-                    "这些文件提供了所有测序文件计算出的甲基化情况，你可以用这些数据生成与本报表一模一样的图，也可以拿去其它分析软件做更进一步的分析。\n\n    \n\n")
+                    "这些文件提供了所有测序文件计算出的甲基化情况，你可以用这些数据生成与本报表一模一样的图，也可以拿去其它分析软件做更进一步的分析。这些数据保存在Reports/Sheets目录中。\n\n    \n\n")
 
         C_data_url = "\n\n[mC data sheet](Sheets/" + report_name + "_mC.xlsx" + ")"
         CG_data_url = "\n\n[mCG data sheet](Sheets/" + report_name + "_mCG.xlsx" + ")"
+        sequence_url = "\n\n[Sequence info sheet](Sheets/" + report_name + "_sequence.xlsx" +")"
+
+
+
+
 
         md = [title, description, sep,
               CG_heat_map_title, CG_heat_map_description, CG_heat_map_md, sep,
               peak_map_title, peak_map_description, CG_peak_map_md, C_peak_map_md, sep,
-              data_title, data_description, C_data_url, CG_data_url]
+              data_title, data_description, C_data_url, CG_data_url, sequence_url]
 
         h5 = markdown.markdown("".join(md), extensions=["tables"], encoding="utf-8")
 
